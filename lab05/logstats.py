@@ -1,7 +1,7 @@
 def parse_event(line: str) -> dict:
     line = line.strip()
     if not line:
-        raise ValueError('Пустная строка')
+        raise ValueError('Пустая строка')
 
 
     parts = line.split(" ", 2)
@@ -61,7 +61,7 @@ def format_report(counts: dict, errors: list[list]) -> str:
         lines.append(f"{lvl}: {counts[lvl]}")
 
     lines.append("")
-    lines.append("Частые ошибки")
+    lines.append("Частые ошибки:")
 
     for msg, cnt in errors:
         lines.append(f"- {msg} - {cnt}")
