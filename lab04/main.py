@@ -1,5 +1,5 @@
 import sys
-from stats import parse_record, read_valid, average_by_city, warmest_city
+from stats import read_valid, average_by_city, warmest_city
 
 def main():
     lines = sys.stdin.read().splitlines()
@@ -11,7 +11,13 @@ def main():
         if not line.strip():
             continue
         try:
-            parse_record(line)
+            parts = line.split(";")
+            if len(parts) != 3:
+                raise ValueError("Неверное количество полей")
+            city, temp_str, date = parts
+            if not city.strip() or not date.strip():
+                raise ValueError("Город или дата пустые")
+            float(temp_str)
         except ValueError:
             skipped_count += 1
 
@@ -23,7 +29,7 @@ def main():
         avg_temp = average_by_city(valid_records)[warm_city]
         print(avg_temp)
     else:
-        print(0.0)
+        print(f"{avg_temp:.1f}")
 
 if __name__ == "__main__":
     main()
