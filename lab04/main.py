@@ -27,9 +27,9 @@ def main():
     if valid_records:
         warm_city = warmest_city(valid_records)
         avg_temp = average_by_city(valid_records)[warm_city]
-        print(avg_temp)
-    else:
         print(f"{avg_temp:.1f}")
+    else:
+        print("0.0")
 
 if __name__ == "__main__":
     main()
