@@ -11,13 +11,13 @@ def parse_record(line: str) -> dict:
         raise ValueError("Дата не может быть пустой")
 
     try:
-        temp = float(temp_str)
+        temperature = float(temp_str)
     except ValueError:
         raise ValueError(f"Температура не является числом: '{temp_str}'")
 
     return {
         "city": city.strip(),
-        "temp": temp,
+        "temp": temperature,
         "date": date.strip()
     }
 
@@ -41,7 +41,7 @@ def average_by_city(records: list[dict]) -> dict:
 
     for r in records:
         city = r["city"]
-        temp = r["temp"]
+        temperature = r["temperature"]
         total[city] = total.get(city, 0) + temp
         count[city] = count.get(city, 0) + 1
 
