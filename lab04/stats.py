@@ -1,25 +1,35 @@
 def parse_record(line: str) -> dict:
+    line = line.strip()
+    if not line:
+        raise ValueError("Пустая строка")
+
     parts = line.split(";")
     if len(parts) != 3:
         raise ValueError(f"Неверное количество полей: ожидается 3, найдено {len(parts)}")
 
-    city, temp_str, date = parts
+    city = parts[0].strip()
+    temp_str = parts[1].strip()
+    date = parts[2].strip()
 
-    if not city.strip():
+    if not city:
         raise ValueError("Город не может быть пустым")
-    if not date.strip():
+    if not date:
         raise ValueError("Дата не может быть пустой")
 
+    # Замена запятой на точку для корректного float
+    temp_str_clean = temp_str.replace(",", ".")
+
     try:
-        temp = float(temp_str)
+        temp = float(temp_str_clean)
     except ValueError:
         raise ValueError(f"Температура не является числом: '{temp_str}'")
 
     return {
-        "city": city.strip(),
-        "temperature": temp,          # <-- теперь именно temperature
-        "date": date.strip()
+        "city": city,
+        "temperature": temp,
+        "date": date
     }
+
 
 
 def read_valid(lines: list[str]) -> list[dict]:
