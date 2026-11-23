@@ -1,7 +1,19 @@
 from collections import Counter
 
+
 def count_by_extension(paths: list[str]) -> dict[str, int]:
-    exts = [p.rsplit(".", 1)[-1].lower() if "." in p else "" for p in paths]
+    exts = []
+    for p in paths:
+        # Ищем последнюю точку
+        last_dot = p.rfind(".")
+
+        # Если точки нет ИЛИ точка стоит в самом начале (как в .gitignore)
+        if last_dot == -1 or last_dot == 0:
+            exts.append("")
+        else:
+            # Берём часть после последней точки и приводим к нижнему регистру
+            exts.append(p[last_dot + 1:].lower())
+
     return dict(Counter(exts))
 
 def deepest_path(paths: list[str]) -> str:
