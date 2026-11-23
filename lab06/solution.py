@@ -20,4 +20,3 @@ def human_size(n_bytes: int) -> str:
     if unit_idx == 0:
         return f"{int(size)} {units[unit_idx]}"
     return f"{size:.1f} {units[unit_idx]}"
-print('ghh')
